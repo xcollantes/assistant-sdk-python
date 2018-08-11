@@ -423,7 +423,7 @@ def main(api_endpoint, credentials, project_id,
 
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(pin1, GPIO.OUT, initial=0)
-    
+
     @device_handler.command('action.devices.commands.OnOff')
     def onoff(on):
         if on:
