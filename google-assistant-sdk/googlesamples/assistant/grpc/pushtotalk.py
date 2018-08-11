@@ -29,6 +29,7 @@ import grpc
 import google.auth.transport.grpc
 import google.auth.transport.requests
 import google.oauth2.credentials
+import RPi.GPIO as GPIO
 
 from google.assistant.embedded.v1alpha2 import (
     embedded_assistant_pb2,
@@ -418,12 +419,19 @@ def main(api_endpoint, credentials, project_id,
 
     device_handler = device_helpers.DeviceRequestHandler(device_id)
 
+    pin1 = 37
+
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(pin1, GPIO.OUT, initial=0)
+    
     @device_handler.command('action.devices.commands.OnOff')
     def onoff(on):
         if on:
             logging.info('Turning device on')
+            GPIO.output(pin1, 1)
         else:
             logging.info('Turning device off')
+            GPIO.output(pin1, 0)
 
     @device_handler.command('com.example.commands.BlinkLight')
     def blink(speed, number):
