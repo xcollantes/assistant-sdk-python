@@ -1,7 +1,7 @@
 {
     "manifest": {
-        "displayName": "Blinky light",
-        "invocationName": "Blinky light",
+        "displayName": "LED light",
+        "invocationName": "light",
         "category": "PRODUCTIVITY"
     },
     "actions": [
