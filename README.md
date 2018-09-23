@@ -1,5 +1,4 @@
-# Google Assistant SDK for devices - Python
-
+# Jarvis
 This repository contains the [Python][python] packages for the [Google Assistant SDK][google-assistant-sdk].
 
 To get started, see the following developer guides:
