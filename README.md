@@ -1,9 +1,6 @@
 # Jarvis
+Personal room assistant built on [Google Assistant Library][getting-started-rpi3-python].
 This repository contains the [Python][python] packages for the [Google Assistant SDK][google-assistant-sdk].
-
-To get started, see the following developer guides:
-- [Introduction to the Google Assistant Library][getting-started-rpi3-python].
-- [Introduction to the Google Assistant Service][getting-started-other-platforms].
 
 ## Content
 
@@ -14,11 +11,6 @@ To get started, see the following developer guides:
   - [googlesamples/assistant/grpc](google-assistant-sdk/googlesamples/assistant/grpc): reference sample for the [Google Assistant Service][google-assistant-api]
   - [googlesamples/assistant/library](google-assistant-sdk/googlesamples/assistant/library): reference sample for the [Google Assistant library][google-assistant-library]
 
-## Contributing
-
-Contributions to this repository are always welcome and highly encouraged.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for more information on how to get started.
 
 ## License
 
