@@ -1,0 +1,28 @@
+{
+  "actions": [
+    {
+      "description": "Turn on a fucking light on motherfucking breadboard.",
+      "name": "Power on",
+      "fulfillment": {
+        "conversationName": "lightPower"
+      },
+      "intent": {
+        "name": "actions.intent.MAIN",
+        "trigger": {
+          "queryPatterns": [
+            "turn on light",
+            "power on",
+            "L.E.D on"  
+	    ]
+        }
+      }
+    }
+  ],
+  "conversations": {
+    "<INSERT YOUR CONVERSATION NAME HERE>": {
+      "name": "<INSERT YOUR CONVERSATION NAME HERE>",
+      "url": "<INSERT YOUR FULLFILLMENT URL HERE>"
+    }
+  },
+  "locale": "en"
+}
