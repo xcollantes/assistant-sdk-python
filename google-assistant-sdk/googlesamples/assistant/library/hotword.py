@@ -21,9 +21,8 @@ import argparse
 import json
 import os.path
 import pathlib2 as pathlib
-
+import RPi.GPIO as GPIO
 import google.oauth2.credentials
-
 from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
@@ -43,6 +42,7 @@ WARNING_NOT_REGISTERED = """
     https://developers.google.com/assistant/sdk/guides/library/python/embed/register-device
 """
 
+pin1 = 37 # PIN LOCATION
 
 def process_event(event):
     """Pretty prints events.
@@ -63,9 +63,14 @@ def process_event(event):
         print()
     if event.type == EventType.ON_DEVICE_ACTION:
         for command, params in event.actions:
-            print('Do command', command, 'with params', str(params))
-
-
+            print('Do command', command, 'with params', str(params)) # Add the following:
+            if command == "action.devices.commands.OnOff":
+                if params['on']:
+                    print('Turning the LED on.')
+                    GPIO.output(pin1, 1)
+                else:
+                    print('Turning the LED off.')
+                    GPIO.output(pin1, 0)
 def main():
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawTextHelpFormatter)
@@ -140,6 +145,13 @@ def main():
                     }, f)
             else:
                 print(WARNING_NOT_REGISTERED)
+
+
+	#LED LIGHT CODE
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(pin1, GPIO.OUT, initial=0)
+        GPIO.output(pin1, 0)
+
 
         for event in events:
             process_event(event)

@@ -419,19 +419,27 @@ def main(api_endpoint, credentials, project_id,
 
     device_handler = device_helpers.DeviceRequestHandler(device_id)
 
-    pin1 = 37
-
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(pin1, GPIO.OUT, initial=0)
-
     @device_handler.command('action.devices.commands.OnOff')
     def onoff(on):
+        pinON = 7
+        pinOFF = 11
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(pinON, GPIO.OUT, initial=0)
+        GPIO.setup(pinOFF, GPIO.OUT, initial=0)
+
+        def burst(pin, seconds=0.5):
+            GPIO.output(pin, 1)
+            time.sleep(seconds)
+            GPIO.output(pin, 0)
+
         if on:
             logging.info('Turning device on')
-            GPIO.output(pin1, 1)
+            burst(pinON)
         else:
             logging.info('Turning device off')
-            GPIO.output(pin1, 0)
+            burst(pinOFF)
+        GPIO.cleanup()
+
 
     @device_handler.command('com.example.commands.BlinkLight')
     def blink(speed, number):
