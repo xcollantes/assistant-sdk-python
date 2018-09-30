@@ -34,7 +34,6 @@ try:
 except NameError:
     FileNotFoundError = IOError
 
-
 WARNING_NOT_REGISTERED = """
     This device is not registered. This means you will not be able to use
     Device Actions or see your device in Assistant Settings. In order to
@@ -64,6 +63,7 @@ def process_event(event):
 
 
 def main():
+    print("HOT WORD MAIN ACCESSED.")
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument('--device-model-id', '--device_model_id', type=str,
@@ -143,6 +143,7 @@ def main():
 
 
 if __name__ == '__main__':
+    print("MAIN OF HOTWORD.PY")
     main()
 
 

@@ -1,2 +1,2 @@
-#googlesamples-assistant-hotword --project-id jarvis-pi-9689f --device-model-id jarvis-pi-9689f-jarvis-ruqurx
-googlesamples-assistant-pushtotalk --project-id jarvis-pi-9689f --device-model-id jarvis-pi-9689f-jarvis-ruqurx
+googlesamples-assistant-hotword --project-id jarvis-pi-9689f --device-model-id jarvis-pi-9689f-jarvis-ruqurx
+#googlesamples-assistant-pushtotalk --project-id jarvis-pi-9689f --device-model-id jarvis-pi-9689f-jarvis-ruqurx
