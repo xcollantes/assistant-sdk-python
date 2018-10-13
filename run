@@ -10,5 +10,8 @@ python /home/pi/jarvis/google-assistant-sdk/googlesamples/assistant/library/hotw
 
 
 # REGISTER
-#googlesamples-assistant-devicetool --project-id jarvis-pi-9689f register-device --device jarvis-pi-9689f --model jarvis-pi-9689f-jarvis-ruqurx --client-type LIBRARY
+#googlesamples-assistant-devicetool --project-id jarvis-pi-9689f \
+#register-device --device F822C53D5DAAFCA9AF5E549DA07465EB \
+#--model jarvis-pi-9689f-jarvis-ruqurx \
+#--client-type LIBRARY
 
