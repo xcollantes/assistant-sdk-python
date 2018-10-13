@@ -22,12 +22,20 @@ import json
 import os.path
 import pathlib2 as pathlib
 
+import RPi.GPIO as GPIO
+
 import google.oauth2.credentials
 
 from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
 from google.assistant.library.device_helpers import register_device
+
+
+# GPIO LAMP
+PIN_ON = 7
+PIN_OFF = 11
+# END GPIO LAMP
 
 try:
     FileNotFoundError
@@ -49,6 +57,8 @@ def process_event(event):
     Args:
         event(event.Event): The current event to process.
     """
+    print("PROCESS_EVENTS")
+
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         print()
 
@@ -61,9 +71,23 @@ def process_event(event):
         for command, params in event.actions:
             print('Do command', command, 'with params', str(params))
 
+            # GPIO LAMP
+            if command == "action.devices.commands.OnOff":
+                if params['on']:
+                    print('Turning the LAMP on.')
+                    GPIO.output(PIN_ON, 1)
+                    time.sleep(0.5)
+                    GPIO.output(PIN_ON, 0)
+                else:
+                    print('Turning the LAMP off.')
+                    GPIO.output(pinOFF, 1)
+                    time.sleep(0.5)
+                    GPIO.output(PIN_OFF, 0)
+                GPIO.cleanup()
+            # END GPIO LAMP
 
 def main():
-    print("HOT WORD MAIN ACCESSED.")
+    print("HOTWORD.PY MAIN ACCESSED.")
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument('--device-model-id', '--device_model_id', type=str,
@@ -137,6 +161,15 @@ def main():
                         }, f)
                 else:
                     print(WARNING_NOT_REGISTERED)
+
+            # Added 10/14/18
+            # Control the GPIO pins
+            GPIO.setmode(GPIO.BOARD)
+            GPIO.setup(PIN_ON, GPIO.OUT, initial=0)
+            GPIO.setup(PIN_OFF, GPIO.OUT, initial=0)
+            # END GPIO
+
+
 
 
             for event in events:
