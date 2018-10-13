@@ -118,29 +118,32 @@ def main():
 
     with Assistant(credentials, device_model_id) as assistant:
         events = assistant.start()
+        try:
+            device_id = assistant.device_id
+            print('device_model_id:', device_model_id)
+            print('device_id:', device_id + '\n')
 
-        device_id = assistant.device_id
-        print('device_model_id:', device_model_id)
-        print('device_id:', device_id + '\n')
+            # Re-register if "device_id" is different from the last "device_id":
+            if should_register or (device_id != last_device_id):
+                if args.project_id:
+                    register_device(args.project_id, credentials,
+                                    device_model_id, device_id)
+                    pathlib.Path(os.path.dirname(args.device_config)).mkdir(
+                        exist_ok=True)
+                    with open(args.device_config, 'w') as f:
+                        json.dump({
+                            'last_device_id': device_id,
+                            'model_id': device_model_id,
+                        }, f)
+                else:
+                    print(WARNING_NOT_REGISTERED)
 
-        # Re-register if "device_id" is different from the last "device_id":
-        if should_register or (device_id != last_device_id):
-            if args.project_id:
-                register_device(args.project_id, credentials,
-                                device_model_id, device_id)
-                pathlib.Path(os.path.dirname(args.device_config)).mkdir(
-                    exist_ok=True)
-                with open(args.device_config, 'w') as f:
-                    json.dump({
-                        'last_device_id': device_id,
-                        'model_id': device_model_id,
-                    }, f)
-            else:
-                print(WARNING_NOT_REGISTERED)
 
-        for event in events:
-            process_event(event)
-
+            for event in events:
+                process_event(event)
+        except Exception as e:
+            print("EXIT: %s" % e)
+            exit(0)
 
 if __name__ == '__main__':
     print("MAIN OF HOTWORD.PY")
