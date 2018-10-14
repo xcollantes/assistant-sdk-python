@@ -1,9 +1,8 @@
 
+
+
 # Call the library hotword file.
 python /home/pi/jarvis/google-assistant-sdk/googlesamples/assistant/library/hotword.py
-
-# This one doesn't work.  
-#googlesamples-assistant-hotword --project-id jarvis-pi-9689f --device-model-id jarvis-pi-9689f-jarvis-ruqurx
 
 #googlesamples-assistant-pushtotalk --project-id jarvis-pi-9689f --device-model-id jarvis-pi-9689f-jarvis-ruqurx
 

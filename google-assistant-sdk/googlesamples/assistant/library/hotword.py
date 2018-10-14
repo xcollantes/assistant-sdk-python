@@ -22,6 +22,7 @@ import json
 import os.path
 import pathlib2 as pathlib
 
+import time
 import RPi.GPIO as GPIO
 
 import google.oauth2.credentials
@@ -72,6 +73,11 @@ def process_event(event):
             print('Do command', command, 'with params', str(params))
 
             # GPIO LAMP
+            # Added 10/14/18
+            GPIO.setmode(GPIO.BOARD)
+            GPIO.setup(PIN_ON, GPIO.OUT, initial=0)
+            GPIO.setup(PIN_OFF, GPIO.OUT, initial=0)
+
             if command == "action.devices.commands.OnOff":
                 if params['on']:
                     print('Turning the LAMP on.')
@@ -80,7 +86,7 @@ def process_event(event):
                     GPIO.output(PIN_ON, 0)
                 else:
                     print('Turning the LAMP off.')
-                    GPIO.output(pinOFF, 1)
+                    GPIO.output(PIN_OFF, 1)
                     time.sleep(0.5)
                     GPIO.output(PIN_OFF, 0)
                 GPIO.cleanup()
@@ -164,9 +170,9 @@ def main():
 
             # Added 10/14/18
             # Control the GPIO pins
-            GPIO.setmode(GPIO.BOARD)
-            GPIO.setup(PIN_ON, GPIO.OUT, initial=0)
-            GPIO.setup(PIN_OFF, GPIO.OUT, initial=0)
+            #GPIO.setmode(GPIO.BOARD)
+            #GPIO.setup(PIN_ON, GPIO.OUT, initial=0)
+            #GPIO.setup(PIN_OFF, GPIO.OUT, initial=0)
             # END GPIO
 
 
